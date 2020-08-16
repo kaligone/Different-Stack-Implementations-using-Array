@@ -1,0 +1,109 @@
+#include<stdio.h>
+int stack[100],top = -1,n,choice,operation;
+
+//function declaration....
+void push();
+void pop();
+void show();
+void peek();
+
+int main()
+{
+    printf("''''''''''''''''STACK OPERATIONS''''''''''''''''");
+
+    //input size of stack......
+    printf("\nEnter the total number of elements in stack....\n");
+    scanf("%d",&n);
+    
+    do{
+        
+         //stack operation choice....
+        printf("Enter choice of operation to be performed on the stack...\n");
+        printf("1.PUSH\n2.POP\n3.SHOW\n4.PEEK TOP ELEMENT\n5.EXIT\n");
+        scanf("%d",&choice);
+        
+        switch(choice)
+        {
+            case 1: 
+                {
+                    push();  //calling push function..
+                    break;
+                }
+        
+            case 2:
+                {
+                    pop();   //calling pop function...
+                    break;
+                } 
+        
+            case 3:
+                {
+                    show();  //calling show function..
+                    break;
+                }
+        
+            case 4:
+                {
+                    peek();  //calling peek function..
+                    break;
+                }
+        
+            case 5:
+                {
+                    break;  //exit from the stack ooperations...
+                }
+        
+            default:
+                {
+                    printf("\nPlease enter the valid number....\n\n");
+                }
+        }
+        
+        //Asking to continue or stop from stack operations..
+        printf("Choose the operation...\n\n1.CONTINUE TO THE STACK OPERATIONS.....\n\n2.STOP THE STACK OPERATION AND EXIT....\n(give input as 1 or 2)\n\n");
+        scanf("%d",&operation);
+    
+    }while(operation==1);  //when user input to 1 the stack operation continues....until user stop it....
+    
+   
+    return 0;
+    
+}
+
+
+//push function....
+    void push()
+    {
+        int element;
+        if(top == n-1)
+            printf("\nTHE STACK IS FULL\n");
+        else
+            printf("\nEnter the number to be push into the stack.....\n");
+            scanf("%d",&element);
+            stack[++top]=element;  //stack incremented by one and given valid value to incremented stack position....
+            
+    }
+    
+    //pop function....
+    void pop()
+    {
+        if(top == -1)
+            printf("\nTHE STACK IS EMPTY\n");
+        else
+            --top;  //stack decremented and value at top is removed
+    }
+    
+    //show function...
+    void show()
+    {
+        int i;
+        for(i=top ; i > -1 ; i--)
+            printf("%d\n",stack[i]);   //showing stack values in reverse order(stack is recursive function..)
+    }
+    
+    //peek function...
+    void peek()
+    {
+        printf("\n%d\n",stack[top]);  //value of top element...
+    }
+    
