@@ -1,0 +1,82 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<strings.h>
+
+int s,i,j,check=0,top=-1;
+char stack[50];
+
+//function declaration.....
+void push(char string[],int s);
+void check_palindrome(char string[],int s);
+
+int main()
+{   printf("*********......PALINDROME CHECK......*********\n");
+    //size of string.........
+    printf("\nEnter the size of string to be checked for PALINDROME..  ------->  ");
+    scanf("%d",&s);
+    //string size is equal to s
+    char string[s];
+    printf("\nEnter the string ------->  ");
+    scanf("%s",string);
+    //calling push function....
+    push(string,s);
+    //caling check palindrome function to check for PALINDROME....
+    check_palindrome(string,s);
+    return 0;
+}
+
+//push function......
+void push(char string[],int s)
+{
+    //pushing the element of string in the stack.....
+    for(j=0 ; j<s ; j++)
+    {
+       stack[++top]=string[j];
+    }
+
+    printf("\n\n");
+    //printing the stack......
+    for(i=top ; i>-1 ; i--)
+    {
+        printf("%c",stack[i]);
+    }
+}
+
+//check_palindrome function ........
+void check_palindrome(char string[],int s)
+{
+    while(check<s)
+    {
+        if(stack[top--]==string[check])  //decrementing the stack and incrementing the string element
+        {
+		        check++;
+		        if(check==s)//when check=size print message and end the program
+		            {
+		                printf(" is equal to ");
+		                while(i<s)
+		                    {
+			                      printf("%c",string[i]);
+			                      i++;
+		                    }
+		                 printf("\n\nYES,It's a PALINDROME...\n");
+		                 break;
+		            }
+              //by comaparing the words of stack and string ,
+              //then continue by checking other elemens...
+		         continue;
+	       }
+	      else
+	      {
+		        printf(" is not equal to ");
+		        while(i<s)
+		            {
+			              printf("%c",string[i]);
+			              i++;
+		            }
+		        printf("\n\nNO,It's not a PALINDROME...\n");
+		        break;
+	      }
+
+
+    }
+}
