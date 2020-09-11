@@ -1,0 +1,84 @@
+#include<stdio.h>
+#include<ctype.h>
+char stack[30],x;
+int top=-1;
+
+void push(char e)
+{
+    stack[++top]=e;
+}
+
+char pop()
+{
+    x =stack[top];
+    top--;
+    return x;
+}
+
+int precedence(char s)
+{
+    if(s=='^')
+    {
+        return (3);
+    }
+    else if(s=='*' || s=='/')
+    {
+        return (2);
+    }
+    else if(s=='+' || s=='-')
+    {
+        return (1);
+    }
+    else
+    {
+        return (0);
+    }
+}
+
+void main()
+{
+     printf("************_____INFIX TO POSTFIX CONVERSION_____************\n");
+     char infix[30],i,*e;
+     printf("\nEnter the INFIX expression.....: ");
+     scanf("%s",infix);
+     e=infix;
+     
+     while(*e != '\0')
+     {
+        if(*e == '(')
+        {
+            push(*e);
+        }
+        else if(isalnum(*e) || isalpha(*e))
+        {
+            printf("%c",*e);
+        }
+        else if(*e == ')')
+        {
+            x=pop();
+            while(x !='(')
+            {
+                printf("%c",x);
+                x=pop();
+            }
+        }
+        else
+        {
+            while(precedence(stack[top]) >= precedence(*e))
+            {
+                x=pop();
+                printf("%c",x);
+            }
+            push(*e);
+        }
+        
+        e++;
+     }
+     
+     while(top != -1)
+     {
+         x=pop();
+         printf("%c",x);
+     }
+     
+}
