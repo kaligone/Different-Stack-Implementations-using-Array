@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<ctype.h>
+
+//stack declaration......
+int stack[30],top=-1;
+
+//function declarations......
+void push(int e);
+int pop();
+
+int main()
+{
+    printf("**********_____POSTFIX EVALUTION USING STACK OF ARRAY**********_____");
+    
+    char postfix_exp[30],*e;
+    printf("\n\nEnter the POSTFIX expression to be evaluated....\n");
+    scanf("%s",postfix_exp);
+    //e is equal to the adress of first element of the expression array.........
+    e=postfix_exp;
+    
+    //evaluating while loop till end of string i.e '\0'................
+    while(*e!='\0')
+    {
+        if(isdigit(*e) || isalpha(*e))
+        {
+            push(*e-48);
+        }
+        else
+        {
+            int operand_2 = pop();
+            int operand_1 = pop();
+            
+            switch(*e)
+            {
+                case '+': push((operand_1 + operand_2)); //push the result in the stack.....
+                          break;
+                case '-': push((operand_1 - operand_2));
+                          break;
+                case '*': push((operand_1 * operand_2));
+                          break;
+                case '/': push((operand_1 / operand_2));
+                          break;
+                default : printf("\nERRORRRRRR......Please give coorect POSTFIX expression..\n");
+            }
+        }
+        e++; //incrementing the adress of e to acess next element of array...........
+    }
+    printf("\nThe POSTFIX evaluation of given expression is.......%d",(int)stack[top]);
+    
+    return 0;
+}
+
+void push(int e)
+{
+    stack[++top]=e;
+}
+
+int pop()
+{
+    int x=stack[top];
+    top--;
+    return x;
+}
